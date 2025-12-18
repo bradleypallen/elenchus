@@ -24,7 +24,7 @@ The dialectical structure draws from medieval *obligationes* (formal disputation
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/elenchus.git
+   git clone https://github.com/bradleypallen/elenchus.git
    cd elenchus
    ```
 
