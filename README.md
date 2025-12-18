@@ -22,21 +22,29 @@ The dialectical structure draws from medieval *obligationes* (formal disputation
 
 ## Setup
 
-1. Copy `CLAUDE.md` somewhere Claude Code will read it (your home directory, a project directory, etc.)
-
-2. Create and initialize a dialectical repo:
+1. Clone this repository:
    ```bash
-   ./setup.sh yourusername/elenchus-alignment
+   git clone https://github.com/yourusername/elenchus.git
+   cd elenchus
+   ```
+
+2. Create and initialize a dialectical repo for your research:
+   ```bash
+   ./setup.sh yourusername/yourresearchtopic
    ```
    
    This creates the repo if needed and sets up the labels. You can have multiple repos for different research domains.
 
-3. Start Claude Code and specify the repo:
+3. Start Claude Code:
+   ```bash
+   claude
    ```
-   Use yourusername/elenchus-alignment for dialectical tracking
+   Then tell Claude:
+   ```
+   Use yourusername/yourresearchtopic for dialectical tracking
    ```
 
-Claude Code will recover all state from the issues and begin operating as your opponent.
+Claude Code will read `CLAUDE.md`, recover all state from the issues, and begin operating as your opponent.
 
 ## Usage
 
@@ -51,7 +59,7 @@ Claude will automatically:
 ### Check your status
 
 ```bash
-./status.sh yourusername/elenchus-alignment
+./status.sh yourusername/yourresearchtopic
 ```
 
 Or ask Claude: "What challenges and tensions are open?"
@@ -61,9 +69,9 @@ Or ask Claude: "What challenges and tensions are open?"
 You can maintain separate dialectical states for different research areas:
 
 ```bash
-./setup.sh yourusername/elenchus-alignment
-./setup.sh yourusername/elenchus-agency
-./setup.sh yourusername/elenchus-interpretability
+./setup.sh yourusername/yourresearchtopic-1
+./setup.sh yourusername/yourresearchtopic-2
+./setup.sh yourusername/yourresearchtopic-3
 ```
 
 Tell Claude which one to use at session start.

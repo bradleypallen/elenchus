@@ -71,7 +71,7 @@ Every session begins by establishing which dialectical repo to use, then recover
 
 **1. Determine the target repo**
 
-The respondent may specify a repo explicitly: "Let's use my `alignment-positions` repo" or "Work with `elenchus-core`."
+The respondent may specify a repo explicitly: "Let's use my `yourresearchtopic` repo" or "Work with `yourresearchtopic`."
 
 If not specified, ask: "Which repository should I use for dialectical tracking?"
 
