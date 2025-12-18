@@ -9,7 +9,7 @@ This system turns Claude Code into a structured intellectual sparring partner. I
 - **Tracks your commitments**: Claims you make become issues, searchable and persistent
 - **Detects tensions**: When your claims conflict, it notices and demands resolution
 - **Generates challenges**: Socratic questions that probe assumptions, implications, and boundaries
-- **Maintains research questions**: Your open questions form a hierarchy (QUD stack)
+- **Maintains research questions**: Your open questions form a hierarchy (a QUD tree)
 - **Enforces consistency**: You can't just slide past contradictions
 
 The dialectical structure draws from medieval *obligationes* (formal disputation games) and Roberts' Questions Under Discussion framework from linguistics.
@@ -39,6 +39,11 @@ The dialectical structure draws from medieval *obligationes* (formal disputation
    ```bash
    claude
    ```
+   or if you wish the flow of the dialogue to go with as few interruptions as possible:
+   ```bash
+   claude --dangerously-skip-permissions
+   ```
+   This bypasses the confirmation prompts for tool calls (bash, file operations, etc.). Claude will execute without asking. For Elenchus, where the operations are presumably well-understood (git commands, file writes to a known repo), this is reasonable.
    Then tell Claude:
    ```
    Use yourusername/yourresearchtopic for dialectical tracking
@@ -154,7 +159,7 @@ Harnad's requirement is addressed by distinguishing original from derivative gro
 Claude Code recovers full dialectical state from GitHub at each session start. The issues *are* the memory—there's no separate state to lose. When you start a session, Claude will:
 
 1. Load all open challenges and tensions
-2. Load your current research questions (QUD stack)
+2. Load your current research questions (the QUD tree)
 3. Load recent commitments
 4. Brief you on what needs attention
 
