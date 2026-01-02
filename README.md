@@ -335,4 +335,4 @@ The QUD framework from Roberts (2012) provides the structure for tracking open r
 - Dutilh Novaes, C. (2011). "Medieval Obligationes as a Theory of Discursive Commitment Management." *Vivarium*, 49, 240–257.
 - Restall, G. (2005). "Multiple Conclusions." In *Logic, Methodology and Philosophy of Science: Proceedings of the Twelfth International Congress*. Kings' College Publications.
 - Brandom, R. (1994). *Making It Explicit*. Harvard University Press.
-- Roberts, C. (2012). "Information Structure in Discourse." *Semantics and Pragmatics*, 5(6), 1-69.
+- Roberts, C. (2012). "Information structure in discourse: Towards a unified theory of formal pragmatics." *Semantics and Pragmatics*, 5(6), 1-69.
