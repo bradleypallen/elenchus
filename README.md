@@ -316,7 +316,7 @@ Dutilh Novaes (2011) further analyzes obligationes as a theory of **discursive c
 
 ### Bilateral Sequent Calculus
 
-The bilateral approach follows Greg Restall's "Multiple Conclusions" (2004), which argues:
+The bilateral approach follows Greg Restall's "Multiple Conclusions" (2005), which argues:
 
 1. **Denial is not assertion of negation**: The ability to deny can precede the ability to negate; supervaluationists and dialetheists show the concepts come apart
 2. **Consequence constrains states**: Valid inference rules out combinations of assertion and denial, not just non-preservation of truth
@@ -333,6 +333,6 @@ The QUD framework from Roberts (2012) provides the structure for tracking open r
 - Dutilh Novaes, C. (2005). "Medieval Obligationes as Logical Games of Consistency Maintenance." *Synthese*, 145(3), 371–395.
 - Dutilh Novaes, C. (2007). *Formalizing Medieval Logical Theories: Suppositio, Consequentiae and Obligationes*. Springer.
 - Dutilh Novaes, C. (2011). "Medieval Obligationes as a Theory of Discursive Commitment Management." *Vivarium*, 49, 240–257.
-- Restall, G. (2004). "Multiple Conclusions." In *Logic, Methodology and Philosophy of Science: Proceedings of the Twelfth International Congress*. Kings' College Publications.
+- Restall, G. (2005). "Multiple Conclusions." In *Logic, Methodology and Philosophy of Science: Proceedings of the Twelfth International Congress*. Kings' College Publications.
 - Brandom, R. (1994). *Making It Explicit*. Harvard University Press.
 - Roberts, C. (2012). "Information Structure in Discourse." *Semantics and Pragmatics*, 5(6), 1-69.
