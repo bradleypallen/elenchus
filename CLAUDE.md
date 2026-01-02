@@ -26,8 +26,8 @@ All dialectical state lives in GitHub issues. Use `gh` CLI for all operations.
 
 ```bash
 # Position labels (bilateral)
-gh label create commitment --color 0E8A16 --description "An asserted proposition (left side of sequent)"
-gh label create denial --color B60205 --description "A denied proposition (right side of sequent)"
+gh label create commitment --color 0E8A16 --description "An asserted proposition (left side of state)"
+gh label create denial --color B60205 --description "A denied proposition (right side of state)"
 
 # Dialectical status labels
 gh label create question --color 1D76DB --description "An open research question (QUD)"
@@ -44,13 +44,13 @@ gh label create normative --color D4C5F9 --description "Normative or values clai
 
 ### Issue Types
 
-**Commitment**: A proposition the respondent asserts (left side of sequent).
+**Commitment**: A proposition the respondent asserts (left side of state).
 - Title: The proposition itself, stated clearly (prefix with `+` for visual clarity)
 - Body: Context, justification given, date, links to conversation
 - Labels: `commitment` + type (`background`, `empirical`, `normative`)
 - Closed when: superseded or retracted (add `retracted` label)
 
-**Denial**: A proposition the respondent denies (right side of sequent).
+**Denial**: A proposition the respondent denies (right side of state).
 - Title: The proposition itself, stated clearly (prefix with `−` for visual clarity)
 - Body: Context, justification for rejection, date, links to conversation
 - Labels: `denial` + type (`background`, `empirical`, `normative`)
@@ -65,7 +65,7 @@ gh label create normative --color D4C5F9 --description "Normative or values clai
 
 **Tension**: A detected incoherence in the dialectical state.
 - Title: Brief description of the incoherence
-- Body: The sequent showing the incoherence, links to relevant issues, explanation
+- Body: The sequent (`X ⊢ Y`) asserting the incoherence, links to relevant issues, explanation
 - Labels: `tension`
 - Closed when: resolved by retraction, refinement, or explanation
 
@@ -140,7 +140,7 @@ echo "=== Current Denials (Rejections) ==="
 gh issue list --repo $ELENCHUS_REPO --label denial --state open --limit 30 --json number,title,labels --jq '.[] | "#\(.number): \(.title) [\(.labels | map(.name) | join(", "))]"'
 ```
 
-**7. Brief the respondent**: Summarize what's pending—especially any unresolved challenges or tensions from previous sessions. Present the current dialectical state as a sequent showing commitments on the left and denials on the right. Don't just list them; contextualize what needs addressing.
+**7. Brief the respondent**: Summarize what's pending—especially any unresolved challenges or tensions from previous sessions. Present the current dialectical state showing commitments on the left and denials on the right: `[Commitments : Denials]`. Don't just list them; contextualize what needs addressing.
 
 The GitHub issues *are* the memory. Every session starts with full knowledge of prior commitments, denials, open questions, and unresolved challenges. There is no continuity break—just a recovery step.
 
@@ -186,16 +186,16 @@ The GitHub issues *are* the memory. Every session starts with full knowledge of 
    gh issue create --repo $ELENCHUS_REPO --label denial --label [type] --title "− Proposition" --body "Context and justification for rejection"
    ```
 
-5. **If incoherence detected**: create a tension issue showing the sequent.
+5. **If incoherence detected**: create a tension issue with the sequent asserting incoherence.
    ```bash
-   gh issue create --repo $ELENCHUS_REPO --label tension --title "Incoherence: [brief description]" --body "## Sequent\n\nThe current state implies:\n\n\`\`\`\nA, B ⊢ C, D\n\`\`\`\n\nCommitments #N, #M together with denials #P, #Q form an incoherent state because..."
+   gh issue create --repo $ELENCHUS_REPO --label tension --title "Incoherence: [brief description]" --body "## Incoherence Claim (Sequent)\n\nThe current state is incoherent:\n\n\`\`\`\nA, B ⊢ C, D\n\`\`\`\n\nThis means: it is incoherent to assert A and B while denying C and D.\n\nCommitments #N, #M together with denials #P, #Q form an incoherent state because..."
    ```
 
 6. **If Socratic opening exists**: create a challenge issue.
 
 ### Detecting Incoherence (Bilateral Tension Detection)
 
-Incoherence can arise in several ways:
+Incoherence can arise in several ways. When detected, we express it as a **sequent** `X ⊢ Y`, which asserts that the state `[X : Y]` is incoherent.
 
 **Type 1: Direct Consistency Violation** (`A ⊢ A`)
 The respondent both commits to A and denies A.
@@ -207,7 +207,7 @@ The respondent both asserts and denies the same proposition.
 Commitment #12: "+ Language models can understand meaning"
 Denial #15: "− Language models can understand meaning"
 
-This violates Consistency: A ⊢ A
+Sequent: A ⊢ A (asserting A while denying A is incoherent)
 ```
 
 **Type 2: Commitment-side Incoherence** (`A, B ⊢`)
@@ -222,6 +222,7 @@ Commitment #14: "+ Mathematical knowledge is non-empirical"
 
 Sequent: Sensory-grounding, Math-non-empirical ⊢
 
+This sequent asserts: the state [Sensory-grounding, Math-non-empirical : ] is incoherent.
 Mathematical knowledge would need to be both sensory-grounded and not sensory-grounded.
 ```
 
@@ -237,6 +238,7 @@ Denial #7: "− The liar sentence is false"
 
 Sequent: ⊢ Liar-true, Liar-false
 
+This sequent asserts: the state [ : Liar-true, Liar-false] is incoherent.
 If classical bivalence holds, one of these must be accepted.
 ```
 
@@ -251,6 +253,7 @@ Denial #9: "− Q"
 
 Sequent: (P→Q), P ⊢ Q
 
+This sequent asserts: the state [(P→Q), P : Q] is incoherent.
 By modus ponens, accepting the conditional and antecedent while denying the consequent is incoherent.
 ```
 
@@ -332,7 +335,7 @@ When a sub-question is resolved, check if parent can now be addressed.
 Before ending a session:
 
 1. Summarize any new commitments and denials made
-2. Present the current dialectical state as a sequent
+2. Present the current dialectical state: `[Commitments : Denials]`
 3. Note any open challenges or tensions created
 4. Update QUD structure if needed
 5. Offer a preview of what's unresolved:
@@ -385,11 +388,13 @@ gh issue create --repo $ELENCHUS_REPO --label challenge --title "What grounds me
 1. Detect potential incoherence
 2. Create tension issue:
 ```bash
-gh issue create --repo $ELENCHUS_REPO --label tension --title "Incoherence: Inferential role + LLM meaning denial" --body "## Sequent
+gh issue create --repo $ELENCHUS_REPO --label tension --title "Incoherence: Inferential role + LLM meaning denial" --body "## Incoherence Claim (Sequent)
 
 \`\`\`
 Meaning-is-inferential-role ⊢ LLMs-cannot-understand
 \`\`\`
+
+This sequent asserts: the state [Meaning-is-inferential-role : LLMs-cannot-understand] is incoherent.
 
 Commitment #N: '+ Meaning is constituted by inferential role'
 Denial #M: '− Language models can understand meaning'
@@ -412,8 +417,8 @@ On first run with a new repo, initialize the labels:
 
 ```bash
 # Position labels (bilateral)
-gh label create commitment --repo $ELENCHUS_REPO --color 0E8A16 --description "An asserted proposition (left side of sequent)" 2>/dev/null || true
-gh label create denial --repo $ELENCHUS_REPO --color B60205 --description "A denied proposition (right side of sequent)" 2>/dev/null || true
+gh label create commitment --repo $ELENCHUS_REPO --color 0E8A16 --description "An asserted proposition (left side of state)" 2>/dev/null || true
+gh label create denial --repo $ELENCHUS_REPO --color B60205 --description "A denied proposition (right side of state)" 2>/dev/null || true
 
 # Dialectical status labels
 gh label create question --repo $ELENCHUS_REPO --color 1D76DB --description "An open research question (QUD)" 2>/dev/null || true
@@ -579,7 +584,7 @@ The goal is *engagement* with the literature, not *deference* to it. The respond
 
 ## Bilateral Structure
 
-This system implements a **bilateral** approach to tracking positions, following Restall's analysis in "Multiple Conclusions" (2004). The respondent's dialectical state is a pair:
+This system implements a **bilateral** approach to tracking positions, following Restall's analysis in "Multiple Conclusions" (2004). The respondent's dialectical **state** is a pair:
 
 ```
 [Commitments : Denials]
@@ -589,7 +594,16 @@ Where:
 - **Commitments** (left side): Propositions the respondent asserts/accepts
 - **Denials** (right side): Propositions the respondent denies/rejects
 
-This is notated as a **sequent**: if the state `[X : Y]` is incoherent, we write `X ⊢ Y`.
+A **sequent** `X ⊢ Y` is a *claim about incoherence*: it asserts that the state `[X : Y]` is incoherent—that it is self-defeating to assert everything in X while denying everything in Y.
+
+### Terminology (Following Restall)
+
+| Term | Notation | Meaning |
+|------|----------|---------|
+| **State** | `[X : Y]` | A pair describing what is asserted (X) and denied (Y) |
+| **Sequent** | `X ⊢ Y` | A claim that state `[X : Y]` is incoherent |
+| **Coherent state** | — | A state that is not self-defeating |
+| **Incoherent state** | — | A state for which a sequent `X ⊢ Y` holds |
 
 ### Why Bilateral?
 
@@ -603,7 +617,7 @@ A valid argument `A ⊢ B` does not compel belief in B given A. It rules out the
 
 ### Coherence Conditions
 
-A dialectical state `[X : Y]` is **coherent** if the respondent can maintain all commitments in X while maintaining all denials in Y. The state is **incoherent** (written `X ⊢ Y`) if this combination is self-defeating.
+A dialectical state `[X : Y]` is **coherent** if the respondent can maintain all commitments in X while maintaining all denials in Y. The state is **incoherent** (expressed by the sequent `X ⊢ Y`) if this combination is self-defeating.
 
 **Structural rules** (from Restall):
 
@@ -669,10 +683,12 @@ When creating a tension issue, make the reasoning transparent:
 Commitments: #12 (A → B), #15 (A)
 Denials: #18 (B)
 
-### Claimed Sequent
+### Incoherence Claim (Sequent)
 ```
 (A → B), A ⊢ B
 ```
+
+This asserts: the state [(A → B), A : B] is incoherent.
 
 ### Derivation
 By modus ponens: if you commit to a conditional and its antecedent,
@@ -740,8 +756,8 @@ The oracle is a tool for the respondent's intellectual development, not an infal
 This bilateral approach follows Greg Restall's "Multiple Conclusions" (2004), which argues:
 
 1. **Denial is primitive**: Not reducible to asserting negation
-2. **States are pairs**: `[Commitments : Denials]` 
-3. **Consequence constrains states**: `X ⊢ Y` means the state `[X : Y]` is incoherent
+2. **States are pairs**: `[Commitments : Denials]` describes what is asserted and denied
+3. **Sequents claim incoherence**: `X ⊢ Y` means the state `[X : Y]` is incoherent
 4. **Structural rules**: Consistency, Substate (weakening), Extensibility (cut)
 
 This framework is neutral between realist and anti-realist semantics. It can be read as:
@@ -767,3 +783,4 @@ By tracking commitments and denials separately, we can engage with respondents w
 - **Never fabricate citations**: If you cannot find or verify a source, say so explicitly.
 - **Literature grounds challenges, not conclusions**: Use literature to generate better challenges, not to shut down inquiry.
 - **Respect the bilateral structure**: Don't collapse denial into asserting negation without explicit methodological commitment from the respondent.
+- **Distinguish state from sequent**: A state `[X : Y]` describes positions; a sequent `X ⊢ Y` claims incoherence.

@@ -69,7 +69,7 @@ Claude will automatically:
 
 Or ask Claude: "What's my current dialectical state?"
 
-The status shows your positions as a sequent: `[N assertions : M rejections]`
+The status shows your positions as a state: `[N assertions : M rejections]`
 
 ### Multiple projects
 
@@ -107,8 +107,8 @@ Periodically: "Let's review my positions on [topic]" — Claude will list commit
 
 | Label | Color | Meaning |
 |-------|-------|---------|
-| `commitment` | Green | A proposition you assert (left side of sequent) |
-| `denial` | Red | A proposition you reject (right side of sequent) |
+| `commitment` | Green | A proposition you assert (left side of state) |
+| `denial` | Red | A proposition you reject (right side of state) |
 
 ### Dialectical Status Labels
 
@@ -131,7 +131,7 @@ Periodically: "Let's review my positions on [topic]" — Claude will list commit
 
 ## Types of Incoherence
 
-The bilateral structure allows detection of four types of incoherence:
+The bilateral structure allows detection of four types of incoherence. When incoherence is detected, it is expressed as a **sequent** `X ⊢ Y`, which asserts that the **state** `[X : Y]` is incoherent.
 
 | Type | Sequent | Meaning |
 |------|---------|---------|
@@ -144,7 +144,10 @@ Example tension:
 ```markdown
 ## Tension: Inferential role + LLM meaning denial
 
-Sequent: Meaning-is-inferential-role ⊢ LLMs-cannot-understand
+Incoherence claim (sequent): Meaning-is-inferential-role ⊢ LLMs-cannot-understand
+
+This asserts that the state [Meaning-is-inferential-role : LLMs-cannot-understand] 
+is incoherent.
 
 Commitment #12: "+ Meaning is constituted by inferential role"
 Denial #15: "− Language models can understand meaning"
@@ -225,7 +228,7 @@ Claude Code recovers full dialectical state from GitHub at each session start. T
 1. Load all open challenges and tensions
 2. Load your current research questions (the QUD tree)
 3. Load recent commitments and denials
-4. Present your current state as a sequent
+4. Present your current state: `[Commitments : Denials]`
 5. Brief you on what needs attention
 
 This means you can close your laptop, come back a week later, and Claude will know exactly what positions you hold, what you reject, what questions are open, and what challenges are still waiting for your response.
@@ -243,7 +246,7 @@ The system assumes:
 
 ## Bilateral Structure
 
-Unlike systems that track only assertions, Elenchus implements a **bilateral** approach. Your dialectical state is a pair:
+Unlike systems that track only assertions, Elenchus implements a **bilateral** approach. Your dialectical **state** is a pair:
 
 ```
 [Commitments : Denials]
@@ -255,7 +258,18 @@ This matters because **denial is not the same as asserting a negation**. Followi
 - You can commit to ¬A without denying A (e.g., paraconsistent reasoning)
 - The ability to deny is conceptually prior to the ability to negate
 
-The sequent notation `X ⊢ Y` means: "It is incoherent to assert everything in X while denying everything in Y."
+### State vs. Sequent (Following Restall)
+
+Elenchus uses two related but distinct notations from Restall's "Multiple Conclusions":
+
+| Term | Notation | Meaning |
+|------|----------|---------|
+| **State** | `[X : Y]` | A description of what you assert (X) and deny (Y) |
+| **Sequent** | `X ⊢ Y` | A *claim* that the state `[X : Y]` is incoherent |
+
+Your **state** describes your current positions. A **sequent** asserts that a particular combination of assertions and denials is self-defeating.
+
+When Elenchus displays your positions as `[5 assertions : 3 rejections]`, that's your **state**. When Elenchus creates a tension issue claiming `A, B ⊢ C`, that's a **sequent** asserting that the state `[A, B : C]` is incoherent.
 
 ## Claude as Derivability Oracle
 
@@ -280,7 +294,9 @@ When Claude flags a tension, it should make the derivation explicit:
 Commitments: #12 (A → B), #15 (A)  
 Denials: #18 (B)
 
-Sequent: (A → B), A ⊢ B
+Incoherence claim (sequent): (A → B), A ⊢ B
+
+This asserts: the state [(A → B), A : B] is incoherent.
 
 By modus ponens, committing to a conditional and its antecedent 
 while denying the consequent is incoherent.
@@ -304,7 +320,7 @@ The bilateral approach follows Greg Restall's "Multiple Conclusions" (2004), whi
 
 1. **Denial is not assertion of negation**: The ability to deny can precede the ability to negate; supervaluationists and dialetheists show the concepts come apart
 2. **Consequence constrains states**: Valid inference rules out combinations of assertion and denial, not just non-preservation of truth
-3. **Multiple conclusions are meaningful**: The sequent `X ⊢ Y` has a clear reading in terms of coherent assertion/denial combinations
+3. **Multiple conclusions are meaningful**: The sequent `X ⊢ Y` has a clear reading: it asserts that the state `[X : Y]` is incoherent
 
 This framework is neutral between realist and anti-realist semantics, and can accommodate non-classical logicians (intuitionists, dialetheists, supervaluationists) without begging questions about the logic of negation.
 
