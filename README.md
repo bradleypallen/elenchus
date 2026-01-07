@@ -328,6 +328,14 @@ This framework is neutral between realist and anti-realist semantics, and can ac
 
 The QUD framework from Roberts (2012) provides the structure for tracking open research questions as a hierarchy. Questions organize inquiry; sub-questions must be resolved before parent questions can be addressed.
 
+## Example Dialectics
+
+To provide concrete examples of the use of Elenchus, here are three dialectics generated in dialogue with the system:
+
+- **An argument that the Beatles are overrated**: [bradleypallen/the-beatles-are-overrated](https://github.com/bradleypallen/the-beatles-are-overrated)
+- **An argument for a reconceptualization of knowledge engineering**, "produced using exactly the methodology it advocates for knowledge engineering": [bradleypallen/social-externalism-and-knowledge-engineering](https://github.com/bradleypallen/social-externalism-and-knowledge-engineering)
+- **A dialectic-in-progress around the design assumptions of the PROV-O ontology**: [bradleypallen/prov-o](https://github.com/bradleypallen/prov-o)
+
 ## References
 
 - Dutilh Novaes, C. (2005). "Medieval Obligationes as Logical Games of Consistency Maintenance." *Synthese*, 145(3), 371–395.
